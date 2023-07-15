@@ -46,8 +46,13 @@
                         <textarea name="Content" class="form-control" id="w3lMessage" placeholder="Mesajınızı Yazabilirsiniz"
                                   required=""></textarea>
                         <div class="text-right">
-                            <button type="submit" class="btn btn-primary btn-style mt-4">Mesajı Gönder</button>
+                            <button type="submit" class="btn btn-primary btn-style mt-4" id="btn1">Mesajı Gönder</button>
                         </div>
+                        <script>
+                            $('#btn1').click(function () {
+                                alert('Mesaj gönderildi...!');
+                            });
+                        </script>
                     </form>
                 </div>
             </div>

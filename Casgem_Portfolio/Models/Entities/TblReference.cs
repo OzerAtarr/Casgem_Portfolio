@@ -12,11 +12,12 @@ namespace Casgem_Portfolio.Models.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class TblContact
+    public partial class TblReference
     {
-        public int ContactID { get; set; }
-        public Nullable<int> Number { get; set; }
-        public string Email { get; set; }
-        public string Adress { get; set; }
+        public int ID { get; set; }
+        public string ReferenceName { get; set; }
+        public string ReferenceNumber { get; set; }
+        public string ReferenceMail { get; set; }
+        public string ReferenceImageUrl { get; set; }
     }
 }

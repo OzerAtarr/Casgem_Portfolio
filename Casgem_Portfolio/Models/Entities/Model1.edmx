@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CasgemPortfolioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CasgemPortfolioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="TblAbout">
           <Key>
             <PropertyRef Name="FeatureID" />
@@ -53,6 +53,11 @@
           <Property Name="EmployeeSalary" Type="decimal" Precision="18" Scale="2" />
           <Property Name="EmployeeDepartment" Type="int" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'CasgemPortfolio.dbo.TblEmployeeCount' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="TblEmployeeCount">
+          <Property Name="StaffCount" Type="int" />
+        </EntityType>-->
         <EntityType Name="TblFeature">
           <Key>
             <PropertyRef Name="FeatureID" />
@@ -71,6 +76,24 @@
           <Property Name="SenderMail" Type="nvarchar" MaxLength="100" />
           <Property Name="MessageSubject" Type="nvarchar" MaxLength="100" />
           <Property Name="Content" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="TblProject">
+          <Key>
+            <PropertyRef Name="ProjectID" />
+          </Key>
+          <Property Name="ProjectID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProjectName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ProjectDescription" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="TblReference">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReferenceName" Type="nvarchar" MaxLength="100" />
+          <Property Name="ReferenceNumber" Type="nvarchar" MaxLength="100" />
+          <Property Name="ReferenceMail" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ReferenceImageUrl" Type="nvarchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="TblResume">
           <Key>
@@ -140,6 +163,8 @@
           <EntitySet Name="TblEmployee" EntityType="Self.TblEmployee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblFeature" EntityType="Self.TblFeature" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblMessage" EntityType="Self.TblMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblProject" EntityType="Self.TblProject" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblReference" EntityType="Self.TblReference" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblResume" EntityType="Self.TblResume" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblService" EntityType="Self.TblService" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblVideo" EntityType="Self.TblVideo" Schema="dbo" store:Type="Tables" />
@@ -150,16 +175,40 @@
             <End Role="TblEmployee" EntitySet="TblEmployee" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CasgemPortfolioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="TblAbout">
+          <Key>
+            <PropertyRef Name="FeatureID" />
+          </Key>
+          <Property Name="FeatureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Title2" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="NameSurname" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CvUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="TblBranch">
           <Key>
             <PropertyRef Name="BranchID" />
           </Key>
           <Property Name="BranchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BranchName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TblContact">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Adress" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="TblDepartment">
           <Key>
@@ -200,6 +249,24 @@
           <Property Name="MessageSubject" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Content" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="TblProject">
+          <Key>
+            <PropertyRef Name="ProjectID" />
+          </Key>
+          <Property Name="ProjectID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProjectName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ProjectDescription" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TblReference">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReferenceName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ReferenceNumber" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ReferenceMail" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ReferenceImageUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="TblResume">
           <Key>
             <PropertyRef Name="ResumeID" />
@@ -220,6 +287,16 @@
           <Property Name="ServiceNumber" Type="String" MaxLength="2" FixedLength="true" Unicode="false" />
           <Property Name="ServiceContent" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
         </EntityType>
+        <EntityType Name="TblVideo">
+          <Key>
+            <PropertyRef Name="VideoID" />
+          </Key>
+          <Property Name="VideoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="VideoUrl1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="VideoUrl2" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
         <EntityType Name="TblWhoAmI">
           <Key>
             <PropertyRef Name="WhoAMIID" />
@@ -229,6 +306,14 @@
           <Property Name="Title2" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="CvUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TblWork">
+          <Key>
+            <PropertyRef Name="WorkID" />
+          </Key>
+          <Property Name="WorkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="InformationRate" Type="Int32" />
         </EntityType>
         <Association Name="FK_TblEmployee_TblDepartment">
           <End Role="TblDepartment" Type="Self.TblDepartment" Multiplicity="0..1" />
@@ -242,76 +327,62 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="CasgemPortfolioEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="CasgemPortfolioEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="TblAbout" EntityType="Self.TblAbout" />
           <EntitySet Name="TblBranch" EntityType="Self.TblBranch" />
+          <EntitySet Name="TblContact" EntityType="Self.TblContact" />
           <EntitySet Name="TblDepartment" EntityType="Self.TblDepartment" />
           <EntitySet Name="TblEmployee" EntityType="Self.TblEmployee" />
           <EntitySet Name="TblFeature" EntityType="Self.TblFeature" />
           <EntitySet Name="TblMessage" EntityType="Self.TblMessage" />
+          <EntitySet Name="TblProject" EntityType="Self.TblProject" />
+          <EntitySet Name="TblReference" EntityType="Self.TblReference" />
           <EntitySet Name="TblResume" EntityType="Self.TblResume" />
           <EntitySet Name="TblService" EntityType="Self.TblService" />
+          <EntitySet Name="TblVideo" EntityType="Self.TblVideo" />
           <EntitySet Name="TblWhoAmI" EntityType="Self.TblWhoAmI" />
+          <EntitySet Name="TblWork" EntityType="Self.TblWork" />
           <AssociationSet Name="FK_TblEmployee_TblDepartment" Association="Self.FK_TblEmployee_TblDepartment">
             <End Role="TblDepartment" EntitySet="TblDepartment" />
             <End Role="TblEmployee" EntitySet="TblEmployee" />
           </AssociationSet>
-          <EntitySet Name="TblContact" EntityType="CasgemPortfolioModel.TblContact" />
-          <EntitySet Name="TblVideo" EntityType="CasgemPortfolioModel.TblVideo" />
-          <EntitySet Name="TblAbout" EntityType="CasgemPortfolioModel.TblAbout" />
-          <EntitySet Name="TblWork" EntityType="CasgemPortfolioModel.TblWork" />
         </EntityContainer>
-        <EntityType Name="TblContact">
-          <Key>
-            <PropertyRef Name="ContactID" />
-          </Key>
-          <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Number" Type="Int32" />
-          <Property Name="Adress" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="TblVideo">
-          <Key>
-            <PropertyRef Name="VideoID" />
-          </Key>
-          <Property Name="VideoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="VideoUrl1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="VideoUrl2" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="TblAbout">
-          <Key>
-            <PropertyRef Name="FeatureID" />
-          </Key>
-          <Property Name="FeatureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Title1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Title2" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="NameSurname" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="City" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="Age" Type="Int32" />
-          <Property Name="Email" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="CvUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-        </EntityType>
-        <EntityType Name="TblWork">
-          <Key>
-            <PropertyRef Name="WorkID" />
-          </Key>
-          <Property Name="WorkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="WorkName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="InformationRate" Type="Int32" />
-        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CasgemPortfolioModelStoreContainer" CdmEntityContainer="CasgemPortfolioEntities">
+        <EntityContainerMapping StorageEntityContainer="CasgemPortfolioModelStoreContainer" CdmEntityContainer="CasgemPortfolioEntities1">
+          <EntitySetMapping Name="TblAbout">
+            <EntityTypeMapping TypeName="CasgemPortfolioModel.TblAbout">
+              <MappingFragment StoreEntitySet="TblAbout">
+                <ScalarProperty Name="FeatureID" ColumnName="FeatureID" />
+                <ScalarProperty Name="Title1" ColumnName="Title1" />
+                <ScalarProperty Name="Title2" ColumnName="Title2" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="NameSurname" ColumnName="NameSurname" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CvUrl" ColumnName="CvUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TblBranch">
             <EntityTypeMapping TypeName="CasgemPortfolioModel.TblBranch">
               <MappingFragment StoreEntitySet="TblBranch">
                 <ScalarProperty Name="BranchID" ColumnName="BranchID" />
                 <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblContact">
+            <EntityTypeMapping TypeName="CasgemPortfolioModel.TblContact">
+              <MappingFragment StoreEntitySet="TblContact">
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -356,6 +427,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TblProject">
+            <EntityTypeMapping TypeName="CasgemPortfolioModel.TblProject">
+              <MappingFragment StoreEntitySet="TblProject">
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="ProjectDescription" ColumnName="ProjectDescription" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblReference">
+            <EntityTypeMapping TypeName="CasgemPortfolioModel.TblReference">
+              <MappingFragment StoreEntitySet="TblReference">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ReferenceName" ColumnName="ReferenceName" />
+                <ScalarProperty Name="ReferenceNumber" ColumnName="ReferenceNumber" />
+                <ScalarProperty Name="ReferenceMail" ColumnName="ReferenceMail" />
+                <ScalarProperty Name="ReferenceImageUrl" ColumnName="ReferenceImageUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TblResume">
             <EntityTypeMapping TypeName="CasgemPortfolioModel.TblResume">
               <MappingFragment StoreEntitySet="TblResume">
@@ -378,6 +469,17 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TblVideo">
+            <EntityTypeMapping TypeName="CasgemPortfolioModel.TblVideo">
+              <MappingFragment StoreEntitySet="TblVideo">
+                <ScalarProperty Name="VideoID" ColumnName="VideoID" />
+                <ScalarProperty Name="Title1" ColumnName="Title1" />
+                <ScalarProperty Name="VideoUrl1" ColumnName="VideoUrl1" />
+                <ScalarProperty Name="VideoUrl2" ColumnName="VideoUrl2" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TblWhoAmI">
             <EntityTypeMapping TypeName="CasgemPortfolioModel.TblWhoAmI">
               <MappingFragment StoreEntitySet="TblWhoAmI">
@@ -389,48 +491,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TblContact">
-            <EntityTypeMapping TypeName="CasgemPortfolioModel.TblContact">
-              <MappingFragment StoreEntitySet="TblContact">
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Adress" ColumnName="Adress" />
-                <ScalarProperty Name="Number" ColumnName="Number" />
-                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TblVideo">
-            <EntityTypeMapping TypeName="CasgemPortfolioModel.TblVideo">
-              <MappingFragment StoreEntitySet="TblVideo">
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="VideoUrl2" ColumnName="VideoUrl2" />
-                <ScalarProperty Name="VideoUrl1" ColumnName="VideoUrl1" />
-                <ScalarProperty Name="Title1" ColumnName="Title1" />
-                <ScalarProperty Name="VideoID" ColumnName="VideoID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TblAbout">
-            <EntityTypeMapping TypeName="CasgemPortfolioModel.TblAbout">
-              <MappingFragment StoreEntitySet="TblAbout">
-                <ScalarProperty Name="CvUrl" ColumnName="CvUrl" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Age" ColumnName="Age" />
-                <ScalarProperty Name="City" ColumnName="City" />
-                <ScalarProperty Name="NameSurname" ColumnName="NameSurname" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
-                <ScalarProperty Name="Title2" ColumnName="Title2" />
-                <ScalarProperty Name="Title1" ColumnName="Title1" />
-                <ScalarProperty Name="FeatureID" ColumnName="FeatureID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TblWork">
             <EntityTypeMapping TypeName="CasgemPortfolioModel.TblWork">
               <MappingFragment StoreEntitySet="TblWork">
-                <ScalarProperty Name="InformationRate" ColumnName="InformationRate" />
-                <ScalarProperty Name="WorkName" ColumnName="WorkName" />
                 <ScalarProperty Name="WorkID" ColumnName="WorkID" />
+                <ScalarProperty Name="WorkName" ColumnName="WorkName" />
+                <ScalarProperty Name="InformationRate" ColumnName="InformationRate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

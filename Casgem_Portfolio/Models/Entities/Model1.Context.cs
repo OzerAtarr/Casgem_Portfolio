@@ -16,7 +16,7 @@ namespace Casgem_Portfolio.Models.Entities
     public partial class CasgemPortfolioEntities : DbContext
     {
         public CasgemPortfolioEntities()
-            : base("name=CasgemPortfolioEntities")
+            : base("name=CasgemPortfolioEntities1")
         {
         }
     
@@ -25,17 +25,19 @@ namespace Casgem_Portfolio.Models.Entities
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<TblAbout> TblAbout { get; set; }
         public virtual DbSet<TblBranch> TblBranch { get; set; }
+        public virtual DbSet<TblContact> TblContact { get; set; }
         public virtual DbSet<TblDepartment> TblDepartment { get; set; }
         public virtual DbSet<TblEmployee> TblEmployee { get; set; }
         public virtual DbSet<TblFeature> TblFeature { get; set; }
         public virtual DbSet<TblMessage> TblMessage { get; set; }
+        public virtual DbSet<TblProject> TblProject { get; set; }
+        public virtual DbSet<TblReference> TblReference { get; set; }
         public virtual DbSet<TblResume> TblResume { get; set; }
         public virtual DbSet<TblService> TblService { get; set; }
-        public virtual DbSet<TblWhoAmI> TblWhoAmI { get; set; }
-        public virtual DbSet<TblContact> TblContact { get; set; }
         public virtual DbSet<TblVideo> TblVideo { get; set; }
-        public virtual DbSet<TblAbout> TblAbout { get; set; }
+        public virtual DbSet<TblWhoAmI> TblWhoAmI { get; set; }
         public virtual DbSet<TblWork> TblWork { get; set; }
     }
 }
