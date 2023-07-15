@@ -56,5 +56,19 @@ namespace Casgem_Portfolio.Controllers
             var values = db.TblBranch.ToArray();
             return PartialView(values);
         }
+
+        public PartialViewResult PartialVideo()
+        {
+            var values = db.TblVideo.ToList();
+            return PartialView(values);
+        }
+        public PartialViewResult PartialGetInTouch()
+        {
+            return PartialView();
+        }
+        public PartialViewResult PartialFooter()
+        {
+            return PartialView();
+        }
     }
 }

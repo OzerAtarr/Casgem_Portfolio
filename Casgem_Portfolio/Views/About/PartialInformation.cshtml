@@ -1,0 +1,12 @@
+﻿@model List<Casgem_Portfolio.Models.Entities.TblWork>
+@foreach (var item in Model)
+{
+    <div class="progress-info">
+        <h6 class="progress-tittle">@item.WorkName</h6>
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped" role="progressbar" style="width: @item.InformationRate%"
+                 aria-valuenow="@item.InformationRate" aria-valuemin="0" aria-valuemax="100">
+            </div>
+        </div>
+    </div>
+}

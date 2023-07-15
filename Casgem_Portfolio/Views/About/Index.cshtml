@@ -3,6 +3,7 @@
     Layout = null;
 }
 
+
 <!--
 Author: W3layouts
 Author URL: http://w3layouts.com
@@ -10,36 +11,56 @@ Author URL: http://w3layouts.com
 <!doctype html>
 <html lang="en">
 
-@Html.Action("PartialHead","Portfolio")
+@Html.Action("PartialHead", "Portfolio")
 
 <body>
     <!-- header -->
-    @Html.Action("PartialNavbar", "Portfolio")
+    @Html.Action("PartialHead", "Portfolio")
     <!-- //header -->
-    <!-- contact breadcrumb -->
+    <!-- about breadcrumb -->
     <section class="w3l-about-breadcrumb text-center">
         <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
             <div class="container py-2">
-                <h2 class="title">İletişime Geç</h2>
+                <h2 class="title">Hakkımda</h2>
                 <ul class="breadcrumbs-custom-path mt-2">
                     <li><a href="~/Portfolio/Index">Ana Sayfa</a></li>
-                    <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> İletişim </li>
+                    <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> About Me </li>
                 </ul>
             </div>
         </div>
     </section>
-    <!-- contact breadcrumb -->
-    <!-- contact block -->
-    <!-- contact1 -->
-    @Html.Action("PartialContact")
+    <!-- //about breadcrumb -->
+    <!-- about page about section -->
+    @Html.Action("PartialAbout")
+    <!-- //about page about section -->
+    <!-- about page second section -->
+    <!-- //about page about section -->
+    <!-- about page third section -->
+    <section class="w3l-content-6 py-5">
+        <div class="content-6-mian py-lg-5 py-md-4">
+            <div class="container">
+                <div class="content-info-in row">
+                    <div class="content-gd col-lg-5">
+                        <h3 class="title-big mb-4">Motivated by the Desire to achieve Success</h3>
+                        <p>
+                            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolorem, odit! Perspiciatis et
+                            consequuntur non, modi quo mollitia labore laborum voluptas quia officiis fugit soluta molestias
+                            quaerat sapiente sunt.
+                        </p>
+                    </div>
+                    <div class="content-gd col-lg-6 offset-lg-1">
+                        @Html.Action("PartialInformation")
 
-
-    <!-- /contact1 -->
-    <div class="map-iframe">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d195360.35335232734!2d32.68022791956674!3d40.08644068234652!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40820fdad0c982a9%3A0xf13ed2bab75c76d6!2sAnkara%20Esenbo%C4%9Fa%20Havaliman%C4%B1!5e0!3m2!1str!2str!4v1689066301501!5m2!1str!2str"
-                width="100%" height="400" frameborder="0" style="border: 0px;" allowfullscreen=""></iframe>
-    </div>
-    <!-- //contact block -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- about page third section -->
+    <!-- subscribe block -->
+    <!-- //subscribe block -->
+    <!-- achievements block -->
+    <!-- //achievements block -->
     <!-- Footer -->
     @Html.Action("PartialFooter", "Portfolio")
     <!-- //Footer -->
@@ -193,8 +214,8 @@ Author URL: http://w3layouts.com
         });</script>
     <!-- //video popup -->
     <!-- stats number counter-->
-    <script src="assets/js/jquery.waypoints.min.js"></script>
-    <script src="assets/js/jquery.countup.js"></script>
+    <script src="~/Templates/alexander-starter/assets/js/jquery.waypoints.min.js"></script>
+    <script src="~/Templates/alexander-starter/assets/js/jquery.countup.js"></script>
     <script>$('.counter').countUp();</script>
     <!-- //stats number counter -->
     <!-- disable body scroll which navbar is in active -->
@@ -233,7 +254,7 @@ Author URL: http://w3layouts.com
         });</script>
     <!--//MENU-JS-->
     <!-- bootstrap js -->
-    <script src=~/Templates/alexander-starter/assets/js/bootstrap.min.js"></script>
+    <script src="~/Templates/alexander-starter/assets/js/bootstrap.min.js"></script>
 
 </body>
 

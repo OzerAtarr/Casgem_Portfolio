@@ -303,6 +303,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\FeatureController.cs" />
@@ -330,7 +331,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entities\TblAbout.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entities\TblBranch.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\TblContact.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Entities\TblDepartment.cs">
@@ -351,7 +358,13 @@
     <Compile Include="Models\Entities\TblService.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entities\TblVideo.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Entities\TblWhoAmI.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Entities\TblWork.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -576,6 +589,13 @@
     <Content Include="Views\Statistic\Index.cshtml" />
     <Content Include="Views\Portfolio\PartialWhoAmI.cshtml" />
     <Content Include="Views\Portfolio\PartialBranch.cshtml" />
+    <Content Include="Views\Contact\PartialContact.cshtml" />
+    <Content Include="Views\Portfolio\PartialVideo.cshtml" />
+    <Content Include="Views\Portfolio\PartialGetInTouch.cshtml" />
+    <Content Include="Views\Portfolio\PartialFooter.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\About\PartialAbout.cshtml" />
+    <Content Include="Views\About\PartialInformation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

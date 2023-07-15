@@ -4,13 +4,36 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="CasgemPortfolioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="CasgemPortfolioModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="TblAbout">
+          <Key>
+            <PropertyRef Name="FeatureID" />
+          </Key>
+          <Property Name="FeatureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title1" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Title2" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="NameSurname" Type="nvarchar" MaxLength="1000" />
+          <Property Name="City" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="1000" />
+          <Property Name="CvUrl" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
         <EntityType Name="TblBranch">
           <Key>
             <PropertyRef Name="BranchID" />
           </Key>
           <Property Name="BranchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BranchName" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TblContact">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Number" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Adress" Type="nvarchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="TblDepartment">
           <Key>
@@ -69,6 +92,16 @@
           <Property Name="ServiceNumber" Type="char" MaxLength="2" />
           <Property Name="ServiceContent" Type="nvarchar" MaxLength="1000" />
         </EntityType>
+        <EntityType Name="TblVideo">
+          <Key>
+            <PropertyRef Name="VideoID" />
+          </Key>
+          <Property Name="VideoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title1" Type="nvarchar" MaxLength="1000" />
+          <Property Name="VideoUrl1" Type="nvarchar" MaxLength="1000" />
+          <Property Name="VideoUrl2" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
         <EntityType Name="TblWhoAmI">
           <Key>
             <PropertyRef Name="WhoAMIID" />
@@ -78,6 +111,14 @@
           <Property Name="Title2" Type="nvarchar" MaxLength="1000" />
           <Property Name="Description" Type="nvarchar" MaxLength="1000" />
           <Property Name="CvUrl" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="TblWork">
+          <Key>
+            <PropertyRef Name="WorkID" />
+          </Key>
+          <Property Name="WorkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WorkName" Type="nvarchar" MaxLength="1000" />
+          <Property Name="InformationRate" Type="int" />
         </EntityType>
         <Association Name="FK_TblEmployee_TblDepartment">
           <End Role="TblDepartment" Type="Self.TblDepartment" Multiplicity="0..1" />
@@ -92,21 +133,24 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="CasgemPortfolioModelStoreContainer">
+          <EntitySet Name="TblAbout" EntityType="Self.TblAbout" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblBranch" EntityType="Self.TblBranch" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblContact" EntityType="Self.TblContact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblDepartment" EntityType="Self.TblDepartment" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblEmployee" EntityType="Self.TblEmployee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblFeature" EntityType="Self.TblFeature" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblMessage" EntityType="Self.TblMessage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblResume" EntityType="Self.TblResume" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblService" EntityType="Self.TblService" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblVideo" EntityType="Self.TblVideo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TblWhoAmI" EntityType="Self.TblWhoAmI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TblWork" EntityType="Self.TblWork" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_TblEmployee_TblDepartment" Association="Self.FK_TblEmployee_TblDepartment">
             <End Role="TblDepartment" EntitySet="TblDepartment" />
             <End Role="TblEmployee" EntitySet="TblEmployee" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CasgemPortfolioModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -211,7 +255,52 @@
             <End Role="TblDepartment" EntitySet="TblDepartment" />
             <End Role="TblEmployee" EntitySet="TblEmployee" />
           </AssociationSet>
+          <EntitySet Name="TblContact" EntityType="CasgemPortfolioModel.TblContact" />
+          <EntitySet Name="TblVideo" EntityType="CasgemPortfolioModel.TblVideo" />
+          <EntitySet Name="TblAbout" EntityType="CasgemPortfolioModel.TblAbout" />
+          <EntitySet Name="TblWork" EntityType="CasgemPortfolioModel.TblWork" />
         </EntityContainer>
+        <EntityType Name="TblContact">
+          <Key>
+            <PropertyRef Name="ContactID" />
+          </Key>
+          <Property Name="ContactID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="Int32" />
+          <Property Name="Adress" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TblVideo">
+          <Key>
+            <PropertyRef Name="VideoID" />
+          </Key>
+          <Property Name="VideoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="VideoUrl1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="VideoUrl2" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TblAbout">
+          <Key>
+            <PropertyRef Name="FeatureID" />
+          </Key>
+          <Property Name="FeatureID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Title2" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="NameSurname" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CvUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TblWork">
+          <Key>
+            <PropertyRef Name="WorkID" />
+          </Key>
+          <Property Name="WorkID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WorkName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="InformationRate" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -297,6 +386,51 @@
                 <ScalarProperty Name="Title2" ColumnName="Title2" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="CvUrl" ColumnName="CvUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblContact">
+            <EntityTypeMapping TypeName="CasgemPortfolioModel.TblContact">
+              <MappingFragment StoreEntitySet="TblContact">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Adress" ColumnName="Adress" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblVideo">
+            <EntityTypeMapping TypeName="CasgemPortfolioModel.TblVideo">
+              <MappingFragment StoreEntitySet="TblVideo">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="VideoUrl2" ColumnName="VideoUrl2" />
+                <ScalarProperty Name="VideoUrl1" ColumnName="VideoUrl1" />
+                <ScalarProperty Name="Title1" ColumnName="Title1" />
+                <ScalarProperty Name="VideoID" ColumnName="VideoID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblAbout">
+            <EntityTypeMapping TypeName="CasgemPortfolioModel.TblAbout">
+              <MappingFragment StoreEntitySet="TblAbout">
+                <ScalarProperty Name="CvUrl" ColumnName="CvUrl" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="NameSurname" ColumnName="NameSurname" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title2" ColumnName="Title2" />
+                <ScalarProperty Name="Title1" ColumnName="Title1" />
+                <ScalarProperty Name="FeatureID" ColumnName="FeatureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TblWork">
+            <EntityTypeMapping TypeName="CasgemPortfolioModel.TblWork">
+              <MappingFragment StoreEntitySet="TblWork">
+                <ScalarProperty Name="InformationRate" ColumnName="InformationRate" />
+                <ScalarProperty Name="WorkName" ColumnName="WorkName" />
+                <ScalarProperty Name="WorkID" ColumnName="WorkID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

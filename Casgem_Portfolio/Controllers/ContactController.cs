@@ -22,5 +22,14 @@ namespace Casgem_Portfolio.Controllers
             db.SaveChanges();
             return RedirectToAction("Index", "Portfolio");
         }
+
+        public PartialViewResult PartialContact()
+        {
+            var values = db.TblContact.ToList();
+            ViewBag.number = db.TblContact.Select(x => x.Number).FirstOrDefault();
+            ViewBag.email = db.TblContact.Select(x => x.Email).FirstOrDefault();
+            ViewBag.adress = db.TblContact.Select(x => x.Adress).FirstOrDefault();
+            return PartialView(values);
+        }
     }
 }
