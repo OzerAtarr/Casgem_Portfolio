@@ -609,6 +609,8 @@
     <Content Include="Views\Project\Index.cshtml" />
     <Content Include="Views\Project\AddProject.cshtml" />
     <Content Include="Views\Project\UpdateProject.cshtml" />
+    <Content Include="Views\Contact\UpdateContact.cshtml" />
+    <Content Include="Views\Contact\GetContact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

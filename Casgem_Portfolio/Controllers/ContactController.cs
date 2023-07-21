@@ -16,11 +16,37 @@ namespace Casgem_Portfolio.Controllers
         {
             return View();
         }
+        [HttpPost]
         public ActionResult Index(TblMessage p)
         {
             db.TblMessage.Add(p);
             db.SaveChanges();
             return RedirectToAction("Index", "Portfolio");
+        }
+
+        [HttpGet]
+        public ActionResult GetContact()
+        {
+            var values = db.TblContact.ToList();
+            return View(values);
+        }
+
+        [HttpGet]
+        public ActionResult UpdateContact(int id)
+        {
+            var values = db.TblContact.Find(id);
+            return View(values);
+        }
+
+        [HttpPost]
+        public ActionResult UpdateContact(TblContact p)
+        {
+            var value = db.TblContact.Find(p.ContactID);
+            value.Adress = p.Adress;
+            value.Number = p.Number;
+            value.Email = p.Email;
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         public PartialViewResult PartialContact()
